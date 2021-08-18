@@ -1,3 +1,3 @@
 # django_project
 
-###* 1.Blog*
+### *1.Blog*
