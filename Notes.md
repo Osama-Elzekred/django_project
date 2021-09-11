@@ -1,9 +1,15 @@
-# Creating a UserUpateForm , ProfileUpdateForm
+## Adding cleanup extentions to deal with deleting old images
 
-## adding the forms to the templates
+## Adding a class based views to list the posts in view.py
 
-### adding enctype= 'multipart/form-data' to deal with photos in backgraud
+## Adding a list and detail class + detail template
 
-## changing the logic in views to update the profile info
+## Adding a post detail route by the id of each post
 
-### Overriding the save fun to resize the profile photo
+## creating a post class and form to create new forms
+
+## Creating a update base class and adding a mixin to it and take its temp from create template which has been created before
+
+## Creating a delete class and template
+
+## Creating a paths to the new urls that we created in nav and post_details

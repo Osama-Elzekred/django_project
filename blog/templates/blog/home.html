@@ -8,10 +8,14 @@
   <div class="media-body">
     <div class="article-metadata">
       <!-- REMOVE  {% url 'profile' %} cause it is wrong -->
-      <a class="mr-2" href="{% url 'profile' %}">{{ post.author }}</a>
+      <a class="mr-2" href="{{% url 'profile' %}}">{{ post.author }}</a>
       <small class="text-muted">{{ post.date_posted | date:"F d, Y"}}</small>
     </div>
-    <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+    <h2>
+      <a class="article-title" href="{% url 'post-detail' post.id %}"
+        >{{ post.title }}</a
+      >
+    </h2>
     <p class="article-content">{{ post.content }}</p>
   </div>
 </article>
