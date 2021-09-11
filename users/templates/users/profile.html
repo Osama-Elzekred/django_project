@@ -1,4 +1,4 @@
-{% extends "blog/base.html" %} {% load crispy_forms_tags %} {% block content %}
+{% extends "blog/base.html" %} {% load bootstrap4 %} {% block content %}
 <div class="content-section">
   <div class="media">
     <img
@@ -13,7 +13,16 @@
       </fieldset>
     </div>
   </div>
-  <!-- FORM HERE -->
+  <form method="POST" , enctype="multipart/form-data">
+    {% csrf_token %}
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4">Profile info</legend>
+      {% bootstrap_form u_form %} {% bootstrap_form p_form %}
+      <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Update</button>
+      </div>
+    </fieldset>
+  </form>
 </div>
 
 {% endblock content %}
