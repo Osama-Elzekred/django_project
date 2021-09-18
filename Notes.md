@@ -1,3 +1,5 @@
-## Adding a pagination to the home page
+## Adding a Password reset routes and templetes
 
-## Adding a route to userprofile in home page to display the user posts
+## Creating an app password in gmail to all django to use the email to send emails
+
+## Adding a email configrations code in settings.py

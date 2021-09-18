@@ -22,13 +22,13 @@
 </article>
 {% endfor %}
 
-<footer>
+<footer style="gap: 3px" class="pagination justify-content-center">
   {% if is_paginated %} {% if page_obj.has_previous %}
   <a class="btn btn-outline-info mb-4" href="?page=1">1</a>
   <a
     class="btn btn-outline-info mb-4"
     href="?page={{page_obj.previous_page_number}}"
-    >Pervious</a
+    >&laquo;</a
   >
   {% endif %}
   <a class="btn btn-info mb-4" href="?page={{page_obj.number }}"
@@ -38,7 +38,7 @@
   <a
     class="btn btn-outline-info mb-4"
     href="?page={{page_obj.next_page_number }}"
-    >Next</a
+    >&raquo;</a
   >
   <a
     class="btn btn-outline-info mb-4"
