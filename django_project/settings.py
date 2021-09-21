@@ -1,3 +1,4 @@
+
 """
 Django settings for django_project project.
 
@@ -12,6 +13,11 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import json
+
+with open('/etc/config.json') as config_file :
+   config = json.load(config_file)
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +27,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^*w^@2ps+x(e-b54d0=*$ovdpedr_5+5%hc60cp#(*=m*-sb3c'
+SECRET_KEY = config['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['172.105.73.177']
 
 
 # Application definition
@@ -122,11 +128,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+STATIC_ROOT=os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-MEDIA_URL='/media/'
 
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'somewhereelse'),
+    os.path.join(BASE_DIR, 'templates')]
+
+MEDIA_URL='/media/'
 MEDIA_ROOT= os.path.join(BASE_DIR,'media')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Default primary key field type
@@ -142,8 +154,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST= 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+EMAIL_HOST_USER =  config['EMAIL_USER']
+EMAIL_HOST_PASSWORD = config['EMAIL_PASS']
 
 
 
