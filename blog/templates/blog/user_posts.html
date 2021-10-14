@@ -23,6 +23,37 @@
       >
     </h2>
     <p class="article-content">{{ post.content }}</p>
+    <div>
+      <hr />
+      <form action="{% url 'like_post' post.pk %}" , method="POST">
+        {% csrf_token %} {% if user in post.likes.all %}
+
+        <button
+          type="submit"
+          ,
+          name="post_id"
+          ,
+          value="{{ post.id }}"
+          ,
+          class="btn btn-danger btn-ms"
+        >
+          UnLike
+        </button>
+        {% else %}
+        <button
+          type="submit"
+          ,
+          name="post_id"
+          ,
+          value="{{ post.id }}"
+          ,
+          class="btn btn-primary btn-ms"
+        >
+          Like
+        </button>
+        {% endif %} - {{post.total_likes}} likes
+      </form>
+    </div>
   </div>
 </article>
 {% endfor %}
@@ -52,4 +83,23 @@
   >
   {% endif %} {% endif %}
 </footer>
-{% endblock content %}
+{% endblock content %} {% block sidebar %}
+<p>Hi everyone , Have a nice day</p>
+<ul class="list-group">
+  <li class="list-group-item list-group-item">
+    Last post :
+    <a class="article-metadata" href="{% url 'post-detail' posts.0.id %}"
+      >{{ posts.0}}</a
+    >
+    - by
+    <a
+      class="mr-2 article-metadata"
+      href="{% url 'user-posts' posts.0.author.username %}"
+      >{{ posts.0.author }}</a
+    >
+  </li>
+  <li class="list-group-item list-group-item-light">Announcements</li>
+  <li class="list-group-item list-group-item-light">Calendars</li>
+  <li class="list-group-item list-group-item-light">etc</li>
+</ul>
+{% endblock sidebar %}
