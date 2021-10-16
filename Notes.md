@@ -1,5 +1,7 @@
-## Adding a Password reset routes and templetes
+## added |safe to the forms
 
-## Creating an app password in gmail to all django to use the email to send emails
+## fixed the cancel buttom in delete page
 
-## Adding a email configrations code in settings.py
+## adding a image to the posts
+
+## changing the like & unlike chape
