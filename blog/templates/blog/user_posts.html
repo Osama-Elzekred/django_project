@@ -22,10 +22,10 @@
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
+        <h5 class="card-title">{{posts.0.author.username}}</h5>
         <p class="card-text">{{posts.0.author.profile.bio }}</p>
         <p class="card-text">
-          <small class="text-muted">Last updated 3 mins ago</small>
+          <small class="text-muted">{{posts.0.author.email }}</small>
         </p>
       </div>
     </div>
