@@ -1,7 +1,5 @@
-## added |safe to the forms
+## Adding dislike button
 
-## fixed the cancel buttom in delete page
+## Adding comments Featur
 
-## adding a image to the posts
-
-## changing the like & unlike chape
+## Adding new icons
