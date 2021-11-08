@@ -1,43 +1,42 @@
 {% extends "blog/base.html" %} {% load bootstrap4 %} {% block content %}
-<style>
-  img {
-    width: 100%;
-    height: 100%;
-  }
-  hr {
-    margin-block-start: 0.1em;
-    margin-block-end: 0.6em;
-  }
-</style>
 <article class="media content-section">
-  <img
-    class="rounded-circle article-img "
-    src="{{object.author.profile.image.url}}"
-    alt=""
-  />
+  
   <div class="media-body">
     <div class="article-metadata">
       <!-- REMOVE  {% url 'profile' %} cause it is wrong -->
-      <a class="mr-2" href="{% url 'user-posts' object.author.username %}"
-        >{{ object.author }}</a
-      >
-      <small class="text-muted">{{ object.date_posted | date:"F d, Y"}}</small>
-      {% if object.author == user %}
+       <div class="d-flex flex-row">
+      <img
+        class="rounded-circle article-img"
+        src="{{post.author.profile.image.url}}"
+        alt=""
+      />
       <div>
+        <a class="mr-2" href="{% url 'user-posts' post.author.username %}"
+          >{{ post.author }}</a
+        >
+        <small class="text-muted">{{ post.date_posted | date:"F d, Y"}}</small>
+        {% if object.author == user %}
+      <div class=" ml-2 float-right">
         <a
           class="btn btn-secondary btn-sm mt-1 mb-1"
           href="{% url 'post-update' object.id %}"
-          ><i class="fas fa-edit"></i> Update</a
+          ><i class="fas fa-edit"></i></a
         >
         <a
           class="btn btn-danger btn-sm mt-1 mb-1"
           href="{% url 'post-delete' object.id %}"
-          > <i class="fas fa-trash"></i> Delete</a
+          > <i class="fas fa-trash"></i></a
         >
       </div>
       {% endif %}
+      <div class="pt-2"><h4>
+            {{ post.title }}
+        </h4></div>  
+      </div>
     </div>
-    <h2 class="article-title">{{ object.title }}</h2>
+
+      
+    </div>
     <p class="article-content">{{ object.content|safe }}</p>
     {% if post.image_url is not null %}
 
@@ -112,7 +111,7 @@
           {% endif %}
       </form>
       </div>
-
+<!-- Comment input -->
       <div class="row justify-content-conter ">
         <div class=" col-sm-12 ">
           <form action="{% url 'post-detail' post.id %}" method="POST">
@@ -131,21 +130,21 @@
       {% for comment in comments %}
       
       <div class="row justify-content-conter mt-2 mb-2 media content-section">
-        <!-- <img
-    class="rounded-circle article-img"
-    src="{{comment.author.profile.image.url}}"
-    alt=""
-  /> -->
         <div class="col-sm-12  ">
         
-          <div class="article-metadata">
+          <div class="article-metadata d-flex flex-row">
+             <img
+    class="rounded-circle comment_author_img"
+    src="{{comment.author.profile.image.url}}"
+    alt=""
+  />
       <a class="mr-2" href="{% url 'user-posts' comment.author.username %}"
         >{{ comment.author }}
         </a>
-      <small class="text-muted">{{ comment.date_posted }}</small>
+      <small class="text-muted mt-1">{{ comment.date_posted }}</small>
       {% if comment.author == request.user %} 
          <a href="{% url 'comment-delete' post.id comment.id %}" , style="color:rgb(238, 31, 31);  ">
-          <i class="fas fa-trash"></i>
+          <i class="fas fa-trash ml-2 float-right"></i>
         </a>
         {% endif %}
     </div>
@@ -153,7 +152,6 @@
         </div>
       </div>
        {% endfor %}
-
   </div>
 </article>
 

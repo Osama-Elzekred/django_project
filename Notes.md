@@ -1,5 +1,7 @@
-## Adding dislike button
+## fixing the indentation problem
 
-## Adding comments Featur
+## Displaying comments in home page
 
-## Adding new icons
+## adding ability to not adding a tile to a post
+
+## fixing the pug when adding a comment while not loging in

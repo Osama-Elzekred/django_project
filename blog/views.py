@@ -67,7 +67,13 @@ class PostListView(ListView):
     context_object_name='posts'  
     ordering= ['-date_posted']
     paginate_by= 4 
-
+    
+    # To display the comments
+    def get_context_data(self, *args,**kwargs) :
+      context = super(PostListView,self).get_context_data( *args,**kwargs)
+      post_comments = Comment.objects.all()
+      context['comments']=post_comments
+      return context
 
 class UserPostListView(ListView):
     model = Post 
@@ -79,28 +85,26 @@ class UserPostListView(ListView):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         return Post.objects.filter(author=user).order_by('-date_posted')
 
-# Comment is not working 
-# Detail view dosent allow POST
+
+# Detail view dosent allow POST by default
 class PostDetailView(DetailView):
     model = Post 
     http_method_names = ['get', 'post']	
     #  defualt looking for :  <app>/<model>_<viewtype>.html
     #             which is : blog/post_detail.html 
 
-
-    # def form_valid(self,form):
-    #     form.instance.author=self.request.user
-    #     return super().form_valid(form)
     form = CommentForm()
     def post(self, request, *args, **kwargs):
         form= CommentForm(request.POST)
-        if form.is_valid():
-            post=self.get_object()
-            form.instance.author=request.user
-            form.instance.post=post
-            form.save()
-
-            return redirect(reverse('post-detail',kwargs={'pk':post.pk}))
+        if request.user.is_authenticated :
+          if form.is_valid():
+              post=self.get_object()
+              form.instance.author=request.user
+              form.instance.post=post
+              form.save()
+  
+              return redirect(reverse('post-detail',kwargs={'pk':post.pk}))
+        return HttpResponseRedirect(reverse('login'))  
 
 
     

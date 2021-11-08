@@ -5,7 +5,7 @@ from django.urls import reverse
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100,blank=True)
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -21,7 +21,8 @@ class Post(models.Model):
         return self.dislikes.count()
 
     def __str__(self):
-        return self.title
+        
+        return str(self.title) or str(self.content[:5]+'...')
 
     def get_absolute_url(self):
         return reverse('post-detail',kwargs={'pk':self.pk})
