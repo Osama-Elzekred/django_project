@@ -1,4 +1,5 @@
 # django_project
 
 ### *1.Blog*
-### *1.Social Media app*
+### *2.Social Media app*
+ 
